@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Goals Check-In — Proper Wealth</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#F5F3EE;min-height:100vh;padding:48px 32px 64px;font-family:'Trebuchet MS',sans-serif}
+  .pw-card{background:#fff;max-width:600px;margin:0 auto;border:0.5px solid #c8c4bc}
+  .pw-header{background:#001430;padding:32px 40px 28px}
+  .pw-logo-mark{font-family:'EB Garamond',Georgia,serif;color:#fff;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:20px;opacity:.7}
+  .pw-title{font-family:'EB Garamond',Georgia,serif;font-size:26px;color:#fff;font-weight:400;margin:0 0 6px;line-height:1.25}
+  .pw-subtitle{font-family:'Trebuchet MS',sans-serif;font-size:13px;color:#fff;opacity:.65;margin:0;line-height:1.5}
+  .pw-gold-rule{height:2px;background:#FCCF03;width:40px;margin:18px 0 0}
+  .pw-body{padding:36px 40px 40px}
+  .pw-question{margin-bottom:32px}
+  .pw-q-label{font-family:'Trebuchet MS',sans-serif;font-size:11px;color:#124666;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;display:block}
+  .pw-q-text{font-family:'EB Garamond',Georgia,serif;font-size:17px;color:#001430;margin:0 0 14px;line-height:1.45}
+  .pw-options{display:flex;flex-direction:column;gap:8px}
+  .pw-option{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid #ddd9d0;background:#fff;cursor:pointer;transition:border-color .15s,background .15s;font-family:'Trebuchet MS',sans-serif;font-size:13.5px;color:#001430;text-align:left;width:100%}
+  .pw-option:hover{border-color:#124666;background:#F5F3EE}
+  .pw-option.selected{border-color:#001430;background:#001430;color:#fff}
+  .pw-option.selected .pw-radio{border-color:#FCCF03;background:#FCCF03}
+  .pw-radio{width:14px;height:14px;border-radius:50%;border:1.5px solid #c8c4bc;flex-shrink:0;transition:all .15s;background:transparent}
+  .pw-divider{height:1px;background:#e8e4dc;margin:28px 0}
+  .pw-name-field{margin-bottom:28px}
+  .pw-input{width:100%;font-family:'Trebuchet MS',sans-serif;font-size:14px;color:#001430;border:1px solid #ddd9d0;background:#fff;padding:11px 14px;outline:none;transition:border-color .15s}
+  .pw-input:focus{border-color:#001430}
+  .pw-input::placeholder{color:#aaa89e}
+  .pw-submit-area{background:#F5F3EE;padding:24px 40px;border-top:1px solid #e8e4dc;display:flex;align-items:center;justify-content:space-between}
+  .pw-tagline{font-family:'Trebuchet MS',sans-serif;font-size:10px;color:#124666;letter-spacing:.15em;text-transform:uppercase;opacity:.7}
+  .pw-btn{background:#001430;color:#fff;font-family:'Trebuchet MS',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:12px 28px;border:none;cursor:pointer;transition:background .15s}
+  .pw-btn:hover{background:#124666}
+  .pw-btn:disabled{background:#c8c4bc;cursor:not-allowed}
+  .pw-success{display:none;text-align:center;padding:48px 40px}
+  .pw-success-icon{width:48px;height:2px;background:#FCCF03;margin:0 auto 24px}
+  .pw-success-title{font-family:'EB Garamond',Georgia,serif;font-size:22px;color:#001430;margin:0 0 10px}
+  .pw-success-text{font-family:'Trebuchet MS',sans-serif;font-size:13px;color:#124666;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="pw-card">
+  <div class="pw-header">
+    <div class="pw-logo-mark">Proper Wealth · pwadvisors.com</div>
+    <h1 class="pw-title">Financial Goals Check-In</h1>
+    <p class="pw-subtitle">Three questions to help us understand where you are and where you want to go.</p>
+    <div class="pw-gold-rule"></div>
+  </div>
+  <div class="pw-body" id="form-body">
+    <div class="pw-name-field">
+      <label class="pw-q-label">Your name</label>
+      <input class="pw-input" type="text" id="field-name" placeholder="First and last name" />
+    </div>
+    <div class="pw-divider"></div>
+    <div class="pw-question">
+      <span class="pw-q-label">Question 1 of 3</span>
+      <p class="pw-q-text">What is your primary financial focus right now?</p>
+      <div class="pw-options" id="q1">
+        <button class="pw-option" onclick="sel('q1',this,'Building wealth')"><span class="pw-radio"></span>Building wealth</button>
+        <button class="pw-option" onclick="sel('q1',this,'Protecting what I have')"><span class="pw-radio"></span>Protecting what I have</button>
+        <button class="pw-option" onclick="sel('q1',this,'Planning for retirement')"><span class="pw-radio"></span>Planning for retirement</button>
+        <button class="pw-option" onclick="sel('q1',this,'Managing a business transition')"><span class="pw-radio"></span>Managing a business transition</button>
+      </div>
+    </div>
+    <div class="pw-divider"></div>
+    <div class="pw-question">
+      <span class="pw-q-label">Question 2 of 3</span>
+      <p class="pw-q-text">How would you describe your current relationship with financial planning?</p>
+      <div class="pw-options" id="q2">
+        <button class="pw-option" onclick="sel('q2',this,'I have a clear plan and follow it')"><span class="pw-radio"></span>I have a clear plan and follow it</button>
+        <button class="pw-option" onclick="sel('q2',this,'I have a plan but it needs updating')"><span class="pw-radio"></span>I have a plan but it needs updating</button>
+        <button class="pw-option" onclick="sel('q2',this,'I manage things as they come up')"><span class="pw-radio"></span>I manage things as they come up</button>
+        <button class="pw-option" onclick="sel('q2',this,'I want more structure and guidance')"><span class="pw-radio"></span>I want more structure and guidance</button>
+      </div>
+    </div>
+    <div class="pw-divider"></div>
+    <div class="pw-question">
+      <span class="pw-q-label">Question 3 of 3</span>
+      <p class="pw-q-text">What would make the biggest difference for you in the next 12 months?</p>
+      <div class="pw-options" id="q3">
+        <button class="pw-option" onclick="sel('q3',this,'Reducing complexity and stress')"><span class="pw-radio"></span>Reducing complexity and stress</button>
+        <button class="pw-option" onclick="sel('q3',this,'Improving tax efficiency')"><span class="pw-radio"></span>Improving tax efficiency</button>
+        <button class="pw-option" onclick="sel('q3',this,'Getting a clearer retirement picture')"><span class="pw-radio"></span>Getting a clearer retirement picture</button>
+        <button class="pw-option" onclick="sel('q3',this,'Better investment strategy')"><span class="pw-radio"></span>Better investment strategy</button>
+      </div>
+    </div>
+  </div>
+  <div class="pw-success" id="success-msg">
+    <div class="pw-success-icon"></div>
+    <h2 class="pw-success-title">Thank you</h2>
+    <p class="pw-success-text">We've received your responses.<br>Your advisor will be in touch shortly.</p>
+  </div>
+  <div class="pw-submit-area">
+    <span class="pw-tagline">Plan. Protect. Invest.</span>
+    <button class="pw-btn" id="submit-btn" onclick="handleSubmit()" disabled>Submit</button>
+  </div>
+</div>
+<script>
+  const FORM_ID = '261276032175049';
+  const answers = {q1:null,q2:null,q3:null};
+  function sel(qId,btn,value){
+    document.querySelectorAll('#'+qId+' .pw-option').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    answers[qId]=value;
+    checkReady();
+  }
+  function checkReady(){
+    const name=document.getElementById('field-name').value.trim();
+    document.getElementById('submit-btn').disabled=!(name&&answers.q1&&answers.q2&&answers.q3);
+  }
+  document.getElementById('field-name').addEventListener('input',checkReady);
+  async function handleSubmit(){
+    const btn=document.getElementById('submit-btn');
+    btn.disabled=true;
+    btn.textContent='Sending...';
+    const name=document.getElementById('field-name').value.trim();
+    const body=new URLSearchParams();
+    body.append('formID',FORM_ID);
+    body.append('q3_name[first]',name.split(' ')[0]||name);
+    body.append('q3_name[last]',name.split(' ').slice(1).join(' ')||'');
+    body.append('q4_whatIs',answers.q1);
+    body.append('q5_howWould',answers.q2);
+    body.append('q6_whatWould',answers.q3);
+    try {
+      await fetch('https://submit.jotform.com/submit/'+FORM_ID+'/',{
+        method:'POST',
+        headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body:body.toString(),
+        mode:'no-cors'
+      });
+      document.getElementById('form-body').style.display='none';
+      document.getElementById('success-msg').style.display='block';
+    } catch(e){
+      btn.disabled=false;
+      btn.textContent='Submit';
+      alert('Something went wrong — please try again.');
+    }
+  }
+</script>
+</body>
+</html>
